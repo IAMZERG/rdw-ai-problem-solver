@@ -1,0 +1,11 @@
+{
+  "name": "rdw-ai",
+  "version": "1.0.0",
+  "description": "A genetic algorithm for optimizing RDW.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "",
+  "license": "ISC"
+}
