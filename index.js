@@ -1,9 +1,30 @@
-var ah = require("./action-helpers.js");
+const ah = require("./action-helpers.js");
+const https = require('https');
 
-const hand_card_actions = {
-  "nothing": 0,
-  "play": 1
-};
+/*******************************
+
+PLAN:
+the turns: handle start of turns as one would normally: untap, upkeep draw
+--TODO(eventually?): add observers for those hooks that can trigger off those.
+
+
+--phenotype  will be an array of numbers that each map to a possible action.
+
+--there will be two genotypes for this example.
+ -one for cards in hand
+ -a second for cards on the battlefield.
+
+
+*********************************/
+
+const hand_card_actions = [
+  "nothing",
+  "play",
+  "tap",
+  "attack",
+  "destroy"
+
+];
 
 const active_card_actions = [
   "nothing", //0
@@ -17,36 +38,40 @@ const active_card_actions = [
 
 const boardstate = {
   theStack: [],
-  p1Library: [],
-  p1Hand: [],
-  p1Graveyard: [],
-  p1Exile: [],
-  p1Battlefield: [],
-  p1Life: 20,
-  p1RedMana: 0,
-  p1GreenMana: 0,
-  p1BlueMana: 0,
-  p1BlackMana: 0,
-  p1WhiteMana: 0,
+  p1: {
 
-  p2Library: [],
-  p2Hand: [],
-  p2Graveyard: [],
-  p2Exile: [],
-  p2Battlefield: [],
-  p2Life: 20,
-  p1RedMana: 0,
-  p1GreenMana: 0,
-  p1BlueMana: 0,
-  p1BlackMana: 0,
-  p1WhiteMana: 0
+    library: [],
+    hand: [],
+    graveyard: [],
+    exile: [],
+    battlefield: [],
+    life: 20,
+    redMana: 0,
+    greenMana: 0,
+    blueMana: 0,
+    blackMana: 0,
+    whiteMana: 0,
+  }
+
+p2: {
+  library: [],
+  hand: [],
+  graveyard: [],
+  exile: [],
+  battlefield: [],
+  life: 20,
+  redMana: 0,
+  greenMana: 0,
+  blueMana: 0,
+  blackMana: 0,
+  whiteMana: 0
 };
 
 const decklist = [
    { "name": "Canyon Wildcat", "cmc": 2, "power": 2, "toughness": 1, "abilities": ["mountainwalk"], "quantity": 4 },
    { "name": "Fireslinger", "cmc": 2, "power": 1, "toughness": 1, "abilities": [], "quantity": 4 },
    { "name": "Jackal Pup", "cmc": 2, "power": 2, "toughness": 1, "abilities": [], "quantity": 4 },
-   "Jackal Pup",
+   {"Jackal Pup",
    "Mogg Conscripts", //
    "Mogg Fanatic", //4
    "Mogg Raider", //4
