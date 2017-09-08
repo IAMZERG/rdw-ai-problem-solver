@@ -72,6 +72,14 @@ class Boardstate {
       }
     });
 
+    try {
+      for(var i=0; i < land_arr.length; i++ ) {
+        //loop through each set of colors starting w/ scarcest
+        for(var j=0; j < land_arr[i]; j++) {
+          //tap a land for the things needed; throw error if needed.
+        }
+      }
+
     // take sorted array, loop through them tapping the necessary sources
     //return 0 if an issue is encountered (i.e. not enough sources
     //nest all of this inside a try/catch loop.
