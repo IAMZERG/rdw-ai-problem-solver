@@ -1,6 +1,8 @@
-const ah = require("./action-helpers.js");
-const tap_lands = require('./tap_lands').tap_lands;
+const actionHelpers = require("./action-helpers.js");
+const tapLands = require('./tap_lands').tapLands;
 const https = require('https');
+const createEmptyBoard = require("./empty_object_initializers").createEmptyBoard;
+const card = require("./empty_object_initializers").card;
 
 /*******************************
 
@@ -36,47 +38,6 @@ const active_card_actions = [
   "exile" //6
 ];
 
-const boardstate = function () {
-  return {
-    theStack: [],
-    activePlayer: "",
-    "p1": {
-
-      library: [],
-      hand: [],
-      graveyard: [],
-      exile: [],
-      battlefield: [],
-      life: 20,
-      redMana: 0,
-      greenMana: 0,
-      blueMana: 0,
-      blackMana: 0,
-      whiteMana: 0,
-    },
-
-    "p2": {
-      library: [],
-      hand: [],
-      graveyard: [],
-      exile: [],
-      battlefield: [],
-      life: 20,
-      redMana: 0,
-      greenMana: 0,
-      blueMana: 0,
-      blackMana: 0,
-      whiteMana: 0
-    }
-  };
-}
-
-const card = {
-  name: "",
-  type: "",
-  state: "",
-  damage: 0
-};
 
 //need a pub/sub method with a call stack to manage actions?
 
@@ -123,14 +84,21 @@ const card_possible_functions = {
     //move card to battlefield
     function (boardstate, player) {
       var temp = boardstate;
-      var success = tap_lands(temp[player], decklist[0]["cmc"]);
+      boardstate.tapLands(red = decklist()[0]["cmc"]);
       temp[player].battlefield.push( temp[player].hand.pop("Canyon Wildcat"));
       return temp;
 
     }
   ]
 };
-    
+/*
+  *********************************************************
+
+  Testing Scratchpad
+
+  *********************************************************
+*/
+/*
 
 var test = boardstate();
 var cw = decklist()[0];
@@ -144,10 +112,23 @@ test.p2.battlefield.push(mtn1);
 test.p2.battlefield.push(mtn2);
 var test_card_name = "Canyon Wildcat";
 
+let testBoardstate = tapLands.Boardstate(
+
 console.log(card_possible_functions[test_card_name][0](test, "p2"));
-console.log(tap_lands(boardstate["p2"], 1));
+console.log(tapLands(boardstate["p2"], 1));
 console.log(test["p2"].battlefield[0]);
 console.log(test["p2"].battlefield[1]);
+
+*/
+
+/*
+  *********************************************************
+
+  Work In Progress
+
+  *********************************************************
+*/
+
 
 
 function turn_loop (boardstate, phenotype1, phenotype2) {
