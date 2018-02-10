@@ -1,14 +1,47 @@
-
 //create boardstate to handle all of this with helper functions?
 
-class Boardstate {
-  constructor(theStack = [], p1 = {}, p2 = {}, activePlayer = "") {
-    this.p1 = p1;
-    this.p2 = p2;
-    this.theStack = theStack;
-    this.activePlayer = activePlayer;
-  }
-  getPlayer(num) {
+
+exports.emptyBoardstate = function () {
+  return {
+    theStack: [],
+    activePlayer: "",
+    p1: {
+
+      library: [],
+      hand: [],
+      graveyard: [],
+      exile: [],
+      battlefield: [],
+      life: 20,
+      redMana: 0,
+      greenMana: 0,
+      blueMana: 0,
+      blackMana: 0,
+      whiteMana: 0,
+    },
+
+    p2: {
+      library: [],
+      hand: [],
+      graveyard: [],
+      exile: [],
+      battlefield: [],
+      life: 20,
+      redMana: 0,
+      greenMana: 0,
+      blueMana: 0,
+      blackMana: 0,
+      whiteMana: 0
+    }
+  };
+}
+function Boardstate(boardstate) {
+    this.p1 = boardstate.p1;
+    this.p2 = boardstate.p2;
+    this.theStack = boardstate.theStack;
+    this.activePlayer = boardstate.activePlayer;
+}
+Boardstate.getPlayer = function(num) {
     if(num === 1) {
       return this.p1;
     } else if (num === 2) {
@@ -16,18 +49,50 @@ class Boardstate {
     } else {
       return 0;
     }
-  }
-  find_lands(p_boardstate, mana_type) {
+};
+
+Boardstate.newBoardstate = function() {
+  return {
+    theStack: [],
+    activePlaye: "",
+    p1: {
+      library: [],
+      hand: [],
+      graveyard: [],
+      exile: [],
+      battlefield: [],
+      life: 20,
+      redMana: 0,
+      greenMana: 0,
+      blueMana: 0,
+      blackMana: 0,
+      whiteMana: 0,
+    },
+    p2: {
+      library: [],
+      hand: [],
+      graveyard: [],
+      exile: [],
+      battlefield: [],
+      life: 20,
+      redMana: 0,
+      greenMana: 0,
+      blueMana: 0,
+      blackMana: 0,
+      whiteMana: 0
+    }
+  };
+};
+Boardstate.find_lands = function(p_boardstate, mana_type) {
 
     return p_board.battlefield.map((card) => {
       if( card.tapsFor.indexOf(mana_type) !== -1 && card.state === "untapped" ) {
         return true;
       }
-      return false;
     });
-  }
+};
 
-  sortLandsByQuantiyAscending(land_arr) {
+Boardstate.sortLandsByQuantiyAscending = function(land_arr) {
     land_arr = land_arr.sort((a,b) => {
       if (a.length < b.length) {
         return -1;
@@ -39,9 +104,9 @@ class Boardstate {
       }
     });
     return land_arr
-  }
+};
   //input types of lands to be tapped
-  tapLands(generic = 0, white = 0, blue = 0, black = 0, red = 0, green = 0, colorless = 0, player = 1) {
+Boardstate.tapLands = function (generic = 0, white = 0, blue = 0, black = 0, red = 0, green = 0, colorless = 0, player = 1) {
     var player_board = this.getPlayer(player);
     var generic_lands = this.find_lands(player_board, "generic");
     var white_lands = this.find_lands(player_board, "white");
@@ -53,7 +118,7 @@ class Boardstate {
 
     var land_arr = [generic_lands, white_lands, blue_lands, black_lands, red_lands, green_lands, colorless_lands];
 
-    sortLandsByQuantityAscending(land_aarr);
+Boardstate.sortLandsByQuantityAscending = function (land_aarr) {
     var mana_needed = [generic, white, blue, black, red, green, colorless];
 
     try {
@@ -83,5 +148,5 @@ class Boardstate {
       console.log("Error: " + err.name + " "+ err.message);
     }
   }
-}
-module.exports.Boardstate;
+};
+exports.Boardstate = Boardstate;

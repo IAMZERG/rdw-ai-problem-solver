@@ -1,6 +1,7 @@
 const actionHelpers = require("./action-helpers.js");
 const tapLands = require('./tap_lands').tapLands;
 const https = require('https');
+//Is this necessary?  Can I just have a method on 
 const createEmptyBoard = require("./empty_object_initializers").createEmptyBoard;
 const card = require("./empty_object_initializers").card;
 

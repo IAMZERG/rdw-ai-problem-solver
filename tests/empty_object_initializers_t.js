@@ -21,7 +21,7 @@ exports.testEmptyBoard = function (test) {
           greenMana: 0,
           blueMana: 0,
           blackMana: 0,
-          whiteMana: 0,
+          whiteMana: 0
         },
         p2: {
           library: [],
