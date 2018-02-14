@@ -84,7 +84,7 @@ Boardstate.prototype.newBoardstate = function() {
   };
 };
 //returns array of sources for mana that are untapped for a certain player
-Boardstate.prototype.find_lands = function(p_boardstate, mana_type) {
+Boardstate.prototype.findLands = function(p_boardstate, mana_type) {
 
     return p_boardstate.battlefield.filter(function (card)  {
       if( card.tapsFor.indexOf(mana_type) !== -1 && card.isTapped === false ) {
@@ -120,11 +120,12 @@ Boardstate.prototype.parseLands = function (generic = 0, white = 0, blue = 0, bl
 
     var land_arr = [generic_lands, white_lands, blue_lands, black_lands, red_lands, green_lands, colorless_lands];
 
+    //returns array of lands
     return land_arr;
 };
 
-Boardstate.prototype.tapLands = function (land_arr) {
-  var mana_needed = [0,0,0,0,0,0,0];
+Boardstate.prototype.tapLands = function (land_arr, mana_needed) {
+  //mana_needed should = [0,0,0,0,0,0,0] or something similar
   //generic, white, blue, black, red, green, colorless
 
   try {
