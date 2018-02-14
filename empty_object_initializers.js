@@ -34,12 +34,26 @@ module.exports.createEmptyBoard = function () {
   };
 }
 
-module.exports.createCard = function () {
+exports.createCard = function (
+    card = { name: "", 
+      type: "", 
+      state: "", 
+      damage: 0, 
+      power: 0,
+      toughness: 0,
+      isTapped: false,
+      tapsFor: [], 
+      equipped: [], 
+      counters: [] }) {
   return {
-    name: "",
-    type: "",
-    state: "",
-    damage: 0,
+    name: card.name,
+    type: card.type,
+    state: card.state,
+    damage: card.damage,
+    power: card.power,
+    toughness: card.toughness,
+    isTapped: card.isTapped,
+    tapsFor: card.tapsFor,
     equipped: [],
     counters: []
   };

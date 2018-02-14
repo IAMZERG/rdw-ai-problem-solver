@@ -49,6 +49,10 @@ exports.testCreateCard = function (test) {
           type: "",
           state: "",
           damage: 0,
+          power: 0,
+          toughness: 0,
+          isTapped: false,
+          tapsFor: [],
           equipped: [],
           counters: []
         }), "generated card matches expected");
