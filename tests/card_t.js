@@ -21,3 +21,8 @@ exports.emptyCard = function (test) {
 };
 
 
+exports.createActionsHasNameAttribute = function (test) {
+  let new_card = createCard({name: "Bob"});
+  test.deepEqual(new_card.actions.name, "Bob", "card action does not have name attribute matching card name");
+  test.done();
+};

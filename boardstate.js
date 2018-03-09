@@ -108,7 +108,7 @@ Boardstate.prototype.sortLandsByQuantiyAscending = function(land_arr) {
     return land_arr
 };
   //input types of lands to be tapped
-Boardstate.prototype.parseLands = function (generic = 0, white = 0, blue = 0, black = 0, red = 0, green = 0, colorless = 0, player = 1) {
+Boardstate.prototype.findAllLandsByColor = function (player) {
     var player_board = this.getPlayer(player);
     var generic_lands = this.find_lands(player_board, "generic");
     var white_lands = this.find_lands(player_board, "white");

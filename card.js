@@ -1,4 +1,6 @@
-let createCard = function (
+const Actions = require('./card_actions');
+
+function createCard (
     card = { name: "", 
       type: "", 
       state: "", 
@@ -8,7 +10,8 @@ let createCard = function (
       isTapped: false,
       tapsFor: [], 
       equipped: [], 
-      counters: [] }) {
+      counters: []
+    }) {
   return {
     name: card.name,
     type: card.type,
@@ -19,7 +22,8 @@ let createCard = function (
     isTapped: card.isTapped,
     tapsFor: card.tapsFor,
     equipped: [],
-    counters: []
+    counters: [],
+    actions: Actions.CardActions(card)
   };
 };
 

@@ -42,7 +42,6 @@ exports.sorting_lands = {
   */
   find_lands: function (test) {
     let red_lands = this.new_boardstate.findLands(this.new_boardstate.p1, "red");
-    console.log(red_lands.length);
     test.equal(red_lands.length, 2);
     test.done();
   }
