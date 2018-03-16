@@ -1,5 +1,6 @@
 let Event = require('../event_loop').Event;
 let Boardstate = require('../boardstate').Boardstate;
+let emptyBoardstate = require('../boardstate').emptyBoardstate;
 
 exports.eventLoopIsEventEmitterAndEmitsEvents = function (test) {
   let some_value = 0;
@@ -42,5 +43,21 @@ exports.eventParams_and_eventName_are_as_expected = function (test) {
 };
 
 
+exports.eventParams_can_pass_executable_functions = function (test) {
+  let TurnSequence = new Event();
+  TurnSequence.Loop.on("cast.p1", function (callback) {
+    callback();
+  });
+  let boardstate = new Boardstate({p1: "foo."});
+  TurnSequence.Loop.on("startTurn", function(boardstate) {
+    TurnSequence.triggerEvent("cast.p1", function() {
 
+      boardstate.p1 = "boo!!!";
+    });
+  });
+  TurnSequence.triggerEvent("startTurn", boardstate);
+
+  test.equal(boardstate.p1, "boo!!!", "foo. didn't get switched to 'boo!!!'");
+  test.done();
+};
 
