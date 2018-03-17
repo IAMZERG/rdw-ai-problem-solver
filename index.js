@@ -42,6 +42,18 @@ const active_card_actions = [
 
 //need a pub/sub method with a call stack to manage actions?
 
+//example turn structure:
+const turnStructure = [
+  "untap",
+  "upkeep",
+  "draw",
+  "main1",
+  "combat",
+  "main2",
+  "end"
+];
+//create an event loop
+// TurnEvents.addTurnSequence("draws
 
 
 const decklist = function () {
@@ -121,31 +133,4 @@ console.log(test["p2"].battlefield[0]);
 console.log(test["p2"].battlefield[1]);
 
 */
-
-/*
-  *********************************************************
-
-  Work In Progress
-
-  *********************************************************
-*/
-
-
-
-function turn_loop (boardstate, phenotype1, phenotype2) {
-  //upkeep, untap, draw
-
-  //first main phase
-
-
-  //combat
-
-  //second main
-
-  //end of turn
-
-  //use event loop that listens for actions, and fires all events as they are reached?
-  //what events to support?
-
-}
 

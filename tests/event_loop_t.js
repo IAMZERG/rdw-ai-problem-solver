@@ -61,3 +61,23 @@ exports.eventParams_can_pass_executable_functions = function (test) {
   test.done();
 };
 
+exports.addEvents_adds_events_to_EE = function (test) {
+  let TurnSequence = new Event();
+  let baz = "";
+  TurnSequence.addEvents([
+      ["foo", 
+      function(bar) {
+        baz = bar;
+      }],
+      ["fuzz",
+      function(bar) {
+        baz = bar + "buzz";
+      }]
+  ]);
+  TurnSequence.triggerEvent("foo", "bar");
+  test.equal(baz, "bar", "baz not set to 'bar'");
+  TurnSequence.triggerEvent("fuzz", "test");
+  test.equal(baz, "testbuzz", "'baz' event param dues not have buzz added to it.");
+  test.done();
+};
+
